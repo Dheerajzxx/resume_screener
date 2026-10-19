@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test (macOS arm64)
+    runs-on: macos-26
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Verify arm64 runner
+        run: test "$(uname -m)" = "arm64"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Run tests
+        run: python -m pytest -q
+
+      - name: Check Python syntax
+        run: python -m compileall -q app.py core ui tests
+
+      - name: Check shell syntax
+        run: bash -n install.sh run.sh build_app.sh
