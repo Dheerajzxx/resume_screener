@@ -27,6 +27,12 @@ All notable changes to this project are documented here. This project follows
   templates, Dependabot, and third-party license notices.
 - Release assets include the app zip, SHA-256 checksum, license, notices, and
   full AGPL-3.0/LGPL-3.0 texts.
+- PyPI packaging: `pyproject.toml` with metadata, MIT license expression,
+  `core.__version__` as the single version source, a `resume-screener` GUI
+  entry point, and `ocr`/`dev` extras; sdist/wheel build validated with
+  `twine check --strict`.
+- PyPI publish workflow that tests, builds, and uploads to PyPI with trusted
+  publishing whenever a `v*` tag is pushed.
 
 ### Licensing
 

@@ -89,6 +89,26 @@ standard library already handles well.
 5. The **Release** GitHub Actions workflow verifies the tag matches
    `__version__`, builds an arm64 `.app`, writes SHA-256 checksums, and creates
    the GitHub release with the zip, license, notices, and full license texts.
+6. The **PyPI** workflow (`.github/workflows/pypi.yml`) runs on the same tag: it
+   re-checks the tag, runs the tests, builds the sdist/wheel with `python -m
+   build`, validates metadata with `twine check --strict`, and publishes to
+   PyPI with Trusted Publishing (no stored token).
+
+### One-time PyPI setup
+
+- Create a PyPI account with 2FA; the first upload claims the
+  `resume-screener` project name.
+- On PyPI, add a **Trusted Publisher** for this repository: owner/repo, workflow
+  file `pypi.yml`, and environment name `pypi`.
+- In GitHub, create an environment named `pypi`
+  (Settings → Environments). No secret is needed; the job uses OIDC.
+- Dry run against TestPyPI first:
+
+  ```bash
+  python -m build
+  python -m twine upload --repository testpypi dist/*
+  pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple resume-screener
+  ```
 
 ## License
 

@@ -13,7 +13,7 @@ against your keywords, and copies or moves the strongest matches into a
 Built with **Python 3.12 + PySide6**, with PyMuPDF for text extraction. Everything
 runs locally — resumes are never uploaded.
 
-![Resume Screener main window](docs/screenshot.png)
+![Resume Screener main window](https://raw.githubusercontent.com/Dheerajzxx/resume_screener/master/docs/screenshot.png)
 
 ## Features
 
@@ -36,11 +36,22 @@ Release builds are published on the repository's **Releases** page as
 `Resume Screener.app` wherever you like. Each release attaches
 `SHA256SUMS.txt`, `LICENSE`, `THIRD_PARTY_NOTICES.md`, and the full
 `AGPL-3.0.txt`/`LGPL-3.0.txt` texts. The packaged app is distributed as an
-**AGPL-3.0 combined work** (see [License](#license)).
+**AGPL-3.0 combined work** (see **License** below).
 
 The app is **ad-hoc signed but not Developer ID-signed or notarized**. On
 another Mac, right-click the app and choose **Open** the first time. To
 distribute more widely, sign and notarize the build with an Apple Developer ID.
+
+## Install with pip
+
+```bash
+pip install resume-screener
+resume-screener
+```
+
+Requires Python 3.12. `PySide6` and `PyMuPDF` are installed as regular
+dependencies, and the entry point launches the same window as the packaged app.
+Everything still runs locally — resumes are never uploaded.
 
 ## Requirements (from source)
 
@@ -105,10 +116,10 @@ the current search filter and sort order.
 The full guide covers installation, scoring, presets, statuses, shortlisting,
 CSV export, shortcuts, troubleshooting, and privacy:
 
-- Read [USER_GUIDE.md](USER_GUIDE.md).
+- Read [USER_GUIDE.md](https://github.com/Dheerajzxx/resume_screener/blob/master/USER_GUIDE.md).
 - Or open **Help → User Guide** inside the app (also the **User Guide** button).
 
-![In-app user guide](docs/user-guide.png)
+![In-app user guide](https://raw.githubusercontent.com/Dheerajzxx/resume_screener/master/docs/user-guide.png)
 
 ## Tests
 
@@ -141,9 +152,10 @@ from `core.__version__`.
 
 The release workflow runs when a `v*` tag is pushed, verifies the tag against
 `core.__version__`, runs the tests, builds the `.app`, creates a zip plus
-SHA-256 checksums, and publishes a GitHub release. See
-[CONTRIBUTING.md](CONTRIBUTING.md#release-process) for the first-publish and
-tagging steps.
+SHA-256 checksums, and publishes a GitHub release. The PyPI workflow publishes
+the same tag to PyPI. See
+[CONTRIBUTING.md](https://github.com/Dheerajzxx/resume_screener/blob/master/CONTRIBUTING.md#release-process)
+for the first-publish and tagging steps.
 
 ## Project layout
 
@@ -191,21 +203,24 @@ opening a window.
 
 ## Contributing
 
-Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) for setup,
-conventions, and the release process, and follow the
-[Code of Conduct](CODE_OF_CONDUCT.md). Please open an issue using the provided
-templates before large changes.
+Contributions are welcome. Read
+[CONTRIBUTING.md](https://github.com/Dheerajzxx/resume_screener/blob/master/CONTRIBUTING.md)
+for setup, conventions, and the release process, and follow the
+[Code of Conduct](https://github.com/Dheerajzxx/resume_screener/blob/master/CODE_OF_CONDUCT.md).
+Please open an issue using the provided templates before large changes.
 
-For security reports, follow [SECURITY.md](SECURITY.md) instead of opening a
-public issue.
+For security reports, follow
+[SECURITY.md](https://github.com/Dheerajzxx/resume_screener/blob/master/SECURITY.md)
+instead of opening a public issue.
 
 ## License
 
 Two licenses apply, and the binary is **not** MIT-only:
 
-- **Source code in this repository** — [MIT](LICENSE) © 2026 Resume Screener
-  contributors. MIT is permissive, so this code may be included in an AGPL-3.0
-  combined work.
+- **Source code in this repository** —
+  [MIT](https://github.com/Dheerajzxx/resume_screener/blob/master/LICENSE)
+  © 2026 Resume Screener contributors. MIT is permissive, so this code may be
+  included in an AGPL-3.0 combined work.
 - **Distributed binaries (`.app` / release zip)** — **AGPL-3.0 combined work**,
   because the app bundles PyMuPDF (AGPL-3.0). Corresponding source is this
   repository: <https://github.com/Dheerajzxx/resume_screener>. The full
@@ -218,6 +233,9 @@ Two licenses apply, and the binary is **not** MIT-only:
 as dynamic libraries and remain replaceable, with `licenses/LGPL-3.0.txt`
 attached to every release.
 
-See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the full dependency
-list, the release checklist, and redistribution obligations, and
-[CHANGELOG.md](CHANGELOG.md) for release history.
+See
+[THIRD_PARTY_NOTICES.md](https://github.com/Dheerajzxx/resume_screener/blob/master/THIRD_PARTY_NOTICES.md)
+for the full dependency list, the release checklist, and redistribution
+obligations, and
+[CHANGELOG.md](https://github.com/Dheerajzxx/resume_screener/blob/master/CHANGELOG.md)
+for release history.

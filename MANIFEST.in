@@ -1,0 +1,11 @@
+include README.md CHANGELOG.md USER_GUIDE.md THIRD_PARTY_NOTICES.md
+include requirements.txt
+recursive-include licenses *.txt *.md
+recursive-include tests *.py
+prune docs
+prune assets
+prune build
+prune dist
+prune release
+global-exclude *.py[cod] .DS_Store
+global-exclude __pycache__/*

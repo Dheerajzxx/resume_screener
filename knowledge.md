@@ -21,13 +21,17 @@ No linter/formatter is configured; code follows PEP 8 with 4-space indentation.
 app.py                  entry point: QApplication + dark theme + MainWindow
 USER_GUIDE.md           end-user guide (source of truth for the in-app copy)
 LICENSE                 MIT (repo source only; the binary is AGPL-3.0, see THIRD_PARTY_NOTICES.md)
+pyproject.toml          PyPI metadata for `resume-screener`: MIT license expression,
+                        dynamic version from core.__version__, gui-scripts entry
+                        point, ocr/dev extras, explicit setuptools packages
+MANIFEST.in             sdist contents (tests + license texts; docs/assets pruned)
 CONTRIBUTING.md         dev setup, conventions, release process
 SECURITY.md             private vulnerability reporting
 CHANGELOG.md            release history (Keep a Changelog)
 THIRD_PARTY_NOTICES.md  dependency licenses, incl. PyMuPDF AGPL and Qt LGPL
 licenses/               full AGPL-3.0 and LGPL-3.0 texts (release assets)
 CODE_OF_CONDUCT.md      contributor expectations
-.github/                CI + tag release workflows, issue/PR templates, Dependabot
+.github/                CI, tag release (zip), and PyPI publish workflows, issue/PR templates, Dependabot
 docs/                   README + user-guide screenshots
 core/                   Qt-free domain logic
   extractor.py          PDF -> text; OK | SCANNED | ENCRYPTED | ERROR; mtime cache
@@ -54,6 +58,7 @@ tests/                  matcher, presets, CSV, guide, shortlist, extractor, head
 - Release asset name: `Resume-Screener-<tag>-macOS-arm64.zip`. Builds are ad-hoc signed, not Developer ID-signed/notarized.
 - Releases also attach `LICENSE`, `THIRD_PARTY_NOTICES.md`, and full `licenses/AGPL-3.0.txt` +
   `licenses/LGPL-3.0.txt` texts; keep them in sync when dependencies change.
+- `.github/workflows/pypi.yml` runs on the same `v*` tag: verifies tag == `__version__`, tests on `macos-26`, runs `python -m build` + `twine check --strict`, uploads the dist artifact, then publishes from `ubuntu-latest` with `pypa/gh-action-pypi-publish` using OIDC (GitHub environment `pypi` must exist and PyPI must have a trusted publisher for `pypi.yml`). Publishing from macOS is avoided because that action needs a Linux container.
 - `build_app.sh` uses `.venv/bin/pyinstaller` when present, otherwise `pyinstaller` from PATH (CI). It syncs `CFBundleShortVersionString`/`CFBundleVersion` from `core.__version__` and re-signs the ad-hoc bundle after editing Info.plist.
 - `requirements.txt` has upper bounds for reproducible release installs.
 
@@ -140,3 +145,4 @@ shows, including rank order.
 - The CI/release workflows are on `origin/master`, and Dependabot branches exist on the remote. The release workflow has not run because no `v*` tag was pushed. `gh` is not installed locally, so the `gh release` branches were tested with a stub; the GitHub-hosted runner provides `gh`.
 - The release package step was run locally with `GITHUB_REF_NAME=v1.0.0`: it produced a 67 MB zip, passed `shasum -c`, and the zip's Info.plist reports version 1.0.0. Both `gh release create` and `gh release upload` branches were exercised with a stub.
 - Local Markdown link/image check passes; no personal paths or secrets were found in source/docs beyond intentional `/Users/...` examples and fictional screenshot names.
+- PyPI packaging verified locally: `python -m build` + `twine check --strict` produce `resume_screener-1.0.0.tar.gz` and a `py3-none-any` wheel (Metadata 2.4, `License-Expression: MIT`, AGPL/LGPL texts inside `dist-info/licenses/`, `gui_scripts` entry point); installing the wheel into a clean Python 3.12 venv and running `resume-screener` under `QT_QPA_PLATFORM=offscreen` launched the real window, while a system Python 3.10 install was correctly rejected by `requires-python >= 3.12`. The sdist contains `core/`, `ui/`, `app.py`, tests, and license texts, with `docs/`/`assets/` pruned. README links/images were made absolute so they render on PyPI.

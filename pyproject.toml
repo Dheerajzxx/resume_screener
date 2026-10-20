@@ -1,3 +1,60 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "resume-screener"
+description = "Score a folder of PDF resumes against your keywords and shortlist the best matches, as a native-feeling macOS desktop app."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE", "licenses/*.txt"]
+keywords = [
+  "resume",
+  "cv",
+  "screening",
+  "pdf",
+  "recruiting",
+  "shortlist",
+  "pyside6",
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: X11 Applications :: Qt",
+  "Intended Audience :: End Users/Desktop",
+  "Operating System :: MacOS",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Utilities",
+]
+dependencies = [
+  "PySide6>=6.7,<7",
+  "PyMuPDF>=1.24,<3",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+ocr = ["pytesseract>=0.3.10,<1"]
+dev = [
+  "pyinstaller>=6.6,<7",
+  "pytest>=8,<10",
+]
+
+[project.gui-scripts]
+resume-screener = "app:main"
+
+[project.urls]
+Homepage = "https://github.com/Dheerajzxx/resume_screener"
+Source = "https://github.com/Dheerajzxx/resume_screener"
+Issues = "https://github.com/Dheerajzxx/resume_screener/issues"
+Releases = "https://github.com/Dheerajzxx/resume_screener/releases"
+
+[tool.setuptools]
+packages = ["core", "ui"]
+py-modules = ["app"]
+
+[tool.setuptools.dynamic]
+version = { attr = "core.__version__" }
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
