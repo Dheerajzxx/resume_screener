@@ -5,12 +5,17 @@ cd "$(dirname "$0")"
 
 if [[ -x ".venv/bin/pyinstaller" ]]; then
   PYINSTALLER=".venv/bin/pyinstaller"
+  PYTHON=".venv/bin/python"
 elif command -v pyinstaller >/dev/null 2>&1; then
   PYINSTALLER="$(command -v pyinstaller)"
+  PYTHON="$(command -v python3)"
 else
   echo "PyInstaller not found. Run ./install.sh first." >&2
   exit 1
 fi
+
+VERSION="$("$PYTHON" -c 'from core import __version__; print(__version__)')"
+APP="dist/Resume Screener.app"
 
 ARGS=(
   --noconfirm
@@ -30,4 +35,14 @@ if [[ -f "assets/icon.icns" ]]; then
 fi
 
 "$PYINSTALLER" "${ARGS[@]}" app.py
-echo "Built: dist/Resume Screener.app"
+
+# PyInstaller leaves CFBundleShortVersionString at 0.0.0. Sync Finder/Get Info
+# with the app version, then re-sign because editing Info.plist invalidates the
+# ad-hoc signature PyInstaller applied.
+/usr/bin/plutil -replace CFBundleShortVersionString -string "${VERSION}" "${APP}/Contents/Info.plist"
+/usr/bin/plutil -replace CFBundleVersion -string "${VERSION}" "${APP}/Contents/Info.plist"
+if command -v codesign >/dev/null 2>&1; then
+  codesign --force --deep --sign - "${APP}"
+fi
+
+echo "Built: ${APP} (version ${VERSION})"

@@ -37,8 +37,9 @@ python app.py
 - If you change UI text, keyboard shortcuts, or dialogs, add or update a
   headless test where practical.
 
-The macOS app itself is not signed. Packaging changes should be checked with
-`./build_app.sh` and a launch of `dist/Resume Screener.app`.
+The macOS app is ad-hoc signed but not Developer ID-signed or notarized.
+Packaging changes should be checked with `./build_app.sh` and a launch of
+`dist/Resume Screener.app`.
 
 ## Code layout and conventions
 
@@ -61,11 +62,30 @@ standard library already handles well.
 
 ## Release process
 
+0. For the first release, create the GitHub repository and push `main`:
+
+   ```bash
+   git init
+   git checkout -b main
+   git add .
+   git commit -m "Initial release"
+   gh repo create <owner>/resume-screener --public --source=. --remote=origin --push
+   ```
+
 1. Update `__version__` in `core/__init__.py` and `CHANGELOG.md`.
 2. Run the full test suite and `./build_app.sh`.
 3. Review [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md); keep the bundled
    dependency list and `licenses/` texts accurate if dependencies change.
-4. Commit and tag the release: `git tag v1.0.0 && git push origin v1.0.0`.
+4. Commit the version bump, push the branch, and tag:
+
+   ```bash
+   git add -A
+   git commit -m "Release v1.0.0"
+   git push origin HEAD
+   git tag v1.0.0
+   git push origin v1.0.0
+   ```
+
 5. The **Release** GitHub Actions workflow verifies the tag matches
    `__version__`, builds an arm64 `.app`, writes SHA-256 checksums, and creates
    the GitHub release with the zip, license, notices, and full license texts.

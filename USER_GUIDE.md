@@ -34,8 +34,8 @@ To build a double-clickable app:
 ./build_app.sh
 ```
 
-The result is `dist/Resume Screener.app`. The app is unsigned, so another Mac
-may require right-click → Open the first time.
+The result is `dist/Resume Screener.app`. The app is not Developer ID-signed or
+notarized, so another Mac may require right-click → Open the first time.
 
 ## Quick start
 
@@ -207,8 +207,9 @@ folder. Only the top level is scanned.
 **macOS asks for folder access.** Allow access to Desktop, Documents, or
 Downloads the first time you scan those locations.
 
-**The app is blocked on another Mac.** It is unsigned; right-click the app and
-choose Open, or sign and notarize it for wider distribution.
+**The app is blocked on another Mac.** It is not Developer ID-signed or
+notarized; right-click the app and choose Open, or sign and notarize it for
+wider distribution.
 
 **Excel shows odd characters.** The CSV is UTF-8 with a BOM and should open
 directly. If you import manually, choose UTF-8.

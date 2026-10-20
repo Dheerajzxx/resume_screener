@@ -51,10 +51,10 @@ tests/                  matcher, presets, CSV, guide, shortlist, extractor, head
 - `core/__init__.py::__version__` is the app version (`1.0.0`); `app.py` sets it on `QApplication` and About displays it.
 - `.github/workflows/ci.yml` runs tests + syntax checks on `macos-26` (arm64).
 - `.github/workflows/release.yml` triggers on `v*` tags, verifies the tag matches `__version__`, tests, builds with `./build_app.sh`, zips `dist/Resume Screener.app`, writes `SHA256SUMS.txt`, uploads the artifact, and creates the GitHub release via `gh`.
-- Release asset name: `Resume-Screener-<tag>-macOS-arm64.zip`. Builds are unsigned.
+- Release asset name: `Resume-Screener-<tag>-macOS-arm64.zip`. Builds are ad-hoc signed, not Developer ID-signed/notarized.
 - Releases also attach `LICENSE`, `THIRD_PARTY_NOTICES.md`, and full `licenses/AGPL-3.0.txt` +
   `licenses/LGPL-3.0.txt` texts; keep them in sync when dependencies change.
-- `build_app.sh` uses `.venv/bin/pyinstaller` when present, otherwise `pyinstaller` from PATH (CI).
+- `build_app.sh` uses `.venv/bin/pyinstaller` when present, otherwise `pyinstaller` from PATH (CI). It syncs `CFBundleShortVersionString`/`CFBundleVersion` from `core.__version__` and re-signs the ad-hoc bundle after editing Info.plist.
 - `requirements.txt` has upper bounds for reproducible release installs.
 
 ## Data flow
@@ -127,14 +127,16 @@ shows, including rank order.
 - Scanned/image-only PDFs are flagged and excluded; OCR is v2 (pytesseract/Tesseract are installed but unused).
 - Folder changes clear stale results, since shortlisting must target the folder that produced the rows.
 - macOS prompts for permission on first access to Desktop/Documents/Downloads.
-- The `.app` is unsigned (Gatekeeper: right-click > Open). Tesseract is not bundled by PyInstaller.
+- The `.app` is ad-hoc signed but not Developer ID-signed/notarized (Gatekeeper: right-click > Open). Tesseract is not bundled by PyInstaller.
 - **Licensing constraint:** PyMuPDF is AGPL-3.0 or commercial, PySide6/Qt is LGPL-3.0/GPL. The repo code is MIT, but redistributing the bundled `.app` triggers AGPL/LGPL obligations; see `THIRD_PARTY_NOTICES.md`. Do not describe the packaged app as MIT-only without addressing this.
 - Release CI must stay on an arm64 runner (`macos-26`, not `macos-26-intel`). Both workflows explicitly assert `uname -m == arm64`.
-- The repository has not been initialized/pushed yet at the time these files were added; GitHub will need a remote and a `v1.0.0` tag for the release workflow to run.
+- The repository is initialized with `origin` = `https://github.com/Dheerajzxx/resume_screener.git`; `master` tracks `origin/master` at commit `990ab6f` (`init`). At the final check, 10 files (release/licensing/build/docs updates) were modified and uncommitted, and no `v*` tag existed. Commit/push them and tag `v1.0.0` to trigger the release workflow; this was not done without explicit push authorization.
 
 ## Verification state
 - `pytest`: 62 passed, including weighted scoring, preset persistence, CSV export (core and UI button), user-guide content sync/rendering, and a headless (`QT_QPA_PLATFORM=offscreen`) end-to-end scan through the real window and worker thread.
 - `install.sh` was run twice; the second run installed nothing and exited 0.
-- `build_app.sh` produced an arm64 `.app` (`com.resumescreener.app`), which launched successfully offscreen.
+- `build_app.sh` produced an arm64 `.app` (`com.resumescreener.app`, version 1.0.0 in Info.plist), which launched successfully offscreen; `codesign --verify --deep --strict` passes on the ad-hoc signature.
 - A frozen smoke binary exercised PyMuPDF extraction and scoring successfully with the layout exclusions.
-- The GitHub Actions workflows were added but cannot be executed until the project is pushed to GitHub; `macos-26` arm64 runners are the intended targets.
+- The CI/release workflows are on `origin/master`, and Dependabot branches exist on the remote. The release workflow has not run because no `v*` tag was pushed. `gh` is not installed locally, so the `gh release` branches were tested with a stub; the GitHub-hosted runner provides `gh`.
+- The release package step was run locally with `GITHUB_REF_NAME=v1.0.0`: it produced a 67 MB zip, passed `shasum -c`, and the zip's Info.plist reports version 1.0.0. Both `gh release create` and `gh release upload` branches were exercised with a stub.
+- Local Markdown link/image check passes; no personal paths or secrets were found in source/docs beyond intentional `/Users/...` examples and fictional screenshot names.

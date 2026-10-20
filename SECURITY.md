@@ -11,7 +11,8 @@
 
 Please do not open a public issue for a security problem. Use the repository's
 **Security → Report a vulnerability** flow (GitHub Security Advisories) so the
-maintainers can investigate privately and coordinate a fix.
+maintainers can investigate privately and coordinate a fix. Maintainers should
+enable **Private vulnerability reporting** in Settings → Code security.
 
 Include, when possible:
 
@@ -26,6 +27,7 @@ Resume Screener processes untrusted PDF files locally with PyMuPDF. Malformed
 PDFs or dependency vulnerabilities may be reportable upstream as well. The app
 does not upload resume text or contact a network service.
 
-The distributed macOS app is unsigned and not notarized; Gatekeeper warnings
-are expected. This is a distribution limitation rather than a security
-vulnerability, but reports of unsafe behavior are still welcome.
+The distributed macOS app is ad-hoc signed but not Developer ID-signed or
+notarized; Gatekeeper warnings are expected. This is a distribution limitation
+rather than a security vulnerability, but reports of unsafe behavior are still
+welcome.

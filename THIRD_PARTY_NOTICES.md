@@ -38,6 +38,10 @@ is provided for convenience, not as legal advice.
   that permits building and distributing non-free programs.
   <https://pyinstaller.org/en/stable/license.html>
 
+PyMuPDF's optional layout/ONNX modules (`pymupdf.layout`, `pymupdf_layout`,
+`pymupdf4llm`, and `onnxruntime`) are intentionally excluded from the bundle by
+`build_app.sh`.
+
 ## Installed for development or future use, not bundled
 
 - **pytesseract** — Apache License 2.0.
@@ -48,11 +52,9 @@ is provided for convenience, not as legal advice.
 
 ## Full license texts
 
-The full AGPL-3.0 and LGPL-3.0 texts ship with the source repository and are
-attached to each GitHub release:
-
-- [licenses/AGPL-3.0.txt](licenses/AGPL-3.0.txt)
-- [licenses/LGPL-3.0.txt](licenses/LGPL-3.0.txt)
+The full AGPL-3.0 and LGPL-3.0 texts ship in the source repository under
+`licenses/` and are attached to each GitHub release as `AGPL-3.0.txt` and
+`LGPL-3.0.txt`.
 
 The PyMuPDF and Qt/PySide6 project pages link the remaining notices and any
 component-specific terms.

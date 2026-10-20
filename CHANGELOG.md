@@ -23,11 +23,16 @@ All notable changes to this project are documented here. This project follows
   app icon.
 - In-app user guide (Help → User Guide) plus `USER_GUIDE.md`.
 - PyInstaller `.app` build script and GitHub Actions CI/release workflows.
+- MIT license, contributor guide, security policy, code of conduct, issue/PR
+  templates, Dependabot, and third-party license notices.
+- Release assets include the app zip, SHA-256 checksum, license, notices, and
+  full AGPL-3.0/LGPL-3.0 texts.
 
 ### Known limitations
 
 - OCR is not implemented; image-only PDFs are flagged as Scanned.
 - Only top-level PDF files are processed.
 - DOCX input and Excel export are not included.
-- macOS builds are unsigned; Gatekeeper may require right-click → Open.
+- macOS builds are ad-hoc signed but not Developer ID-signed or notarized;
+  Gatekeeper may require right-click → Open.
 - Tesseract is installed for future OCR work but is not bundled in the app.

@@ -36,9 +36,9 @@ Release builds are published on the repository's **Releases** page as
 `SHA256SUMS.txt`, `LICENSE`, `THIRD_PARTY_NOTICES.md`, and the full
 `AGPL-3.0.txt`/`LGPL-3.0.txt` texts.
 
-The app is **unsigned and not notarized**. On another Mac, right-click the app
-and choose **Open** the first time. To distribute more widely, sign and notarize
-the build with an Apple Developer ID.
+The app is **ad-hoc signed but not Developer ID-signed or notarized**. On
+another Mac, right-click the app and choose **Open** the first time. To
+distribute more widely, sign and notarize the build with an Apple Developer ID.
 
 ## Requirements (from source)
 
@@ -134,11 +134,14 @@ plus Python and shell syntax checks.
 Build on Apple silicon for an arm64 bundle. If `assets/icon.icns` exists it is
 used automatically. The build excludes PyMuPDF 2.0's optional ONNX layout
 subsystem (the app only needs text extraction), which keeps roughly 50 MB of
-model files out of the bundle.
+model files out of the bundle. The bundle's Finder/Get Info version is synced
+from `core.__version__`.
 
 The release workflow runs when a `v*` tag is pushed, verifies the tag against
 `core.__version__`, runs the tests, builds the `.app`, creates a zip plus
-SHA-256 checksums, and publishes a GitHub release.
+SHA-256 checksums, and publishes a GitHub release. See
+[CONTRIBUTING.md](CONTRIBUTING.md#release-process) for the first-publish and
+tagging steps.
 
 ## Project layout
 

@@ -85,8 +85,9 @@ jobs:
           macOS arm64 build. Download the zip, unzip it, and move
           \`Resume Screener.app\` wherever you like.
 
-          **Unsigned build:** on another Mac, right-click the app and choose
-          Open the first time (or sign and notarize it for wider distribution).
+          **Ad-hoc signed, not notarized:** on another Mac, right-click the app
+          and choose Open the first time (or sign and notarize it for wider
+          distribution).
 
           SHA-256 checksums are attached as \`SHA256SUMS.txt\`. The MIT license,
           third-party notices, and full AGPL/LGPL texts are attached separately;
