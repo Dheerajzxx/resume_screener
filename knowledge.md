@@ -20,7 +20,7 @@ No linter/formatter is configured; code follows PEP 8 with 4-space indentation.
 ```
 app.py                  entry point: QApplication + dark theme + MainWindow
 USER_GUIDE.md           end-user guide (source of truth for the in-app copy)
-LICENSE                 MIT
+LICENSE                 MIT (repo source only; the binary is AGPL-3.0, see THIRD_PARTY_NOTICES.md)
 CONTRIBUTING.md         dev setup, conventions, release process
 SECURITY.md             private vulnerability reporting
 CHANGELOG.md            release history (Keep a Changelog)
@@ -128,7 +128,7 @@ shows, including rank order.
 - Folder changes clear stale results, since shortlisting must target the folder that produced the rows.
 - macOS prompts for permission on first access to Desktop/Documents/Downloads.
 - The `.app` is ad-hoc signed but not Developer ID-signed/notarized (Gatekeeper: right-click > Open). Tesseract is not bundled by PyInstaller.
-- **Licensing constraint:** PyMuPDF is AGPL-3.0 or commercial, PySide6/Qt is LGPL-3.0/GPL. The repo code is MIT, but redistributing the bundled `.app` triggers AGPL/LGPL obligations; see `THIRD_PARTY_NOTICES.md`. Do not describe the packaged app as MIT-only without addressing this.
+- **Licensing constraint (resolved):** PyMuPDF is AGPL-3.0/commercial and PySide6/Qt is LGPL-3.0/GPL. The repo source code stays MIT, but the distributed `.app`/zip is declared an **AGPL-3.0 combined work** because it bundles PyMuPDF; release notes, README badges/section, and `THIRD_PARTY_NOTICES.md` state this and attach the full AGPL/LGPL texts plus a corresponding-source link. Never describe the packaged app as MIT-only; a commercial PyMuPDF build would have to say so explicitly instead.
 - Release CI must stay on an arm64 runner (`macos-26`, not `macos-26-intel`). Both workflows explicitly assert `uname -m == arm64`.
 - The repository is initialized with `origin` = `https://github.com/Dheerajzxx/resume_screener.git`; `master` tracks `origin/master` at commit `990ab6f` (`init`). At the final check, 10 files (release/licensing/build/docs updates) were modified and uncommitted, and no `v*` tag existed. Commit/push them and tag `v1.0.0` to trigger the release workflow; this was not done without explicit push authorization.
 

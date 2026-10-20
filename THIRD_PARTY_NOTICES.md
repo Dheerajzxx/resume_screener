@@ -1,5 +1,30 @@
 # Third-Party Notices
 
+## License of the distributed binary
+
+**The packaged `.app` and the release zip are an AGPL-3.0 combined work, not a
+MIT-only distribution.** They include PyMuPDF, which is AGPL-3.0, so conveying
+the binary conveys it under AGPL-3.0 (or under an Artifex commercial license if
+you build with one and say so).
+
+- The original Resume Screener source code stays MIT ([LICENSE](LICENSE)).
+  MIT is permissive and compatible with inclusion in an AGPL-3.0 combined work;
+  it does not relicense the binary.
+- The full AGPL-3.0 text is attached to every release as
+  `licenses/AGPL-3.0.txt` and ships in this repository under
+  `licenses/AGPL-3.0.txt`, satisfying AGPL section 7.
+- Corresponding source for the app code: this public repository,
+  <https://github.com/Dheerajzxx/resume_screener>. Bundled PyMuPDF and
+  Qt/PySide6 binaries are unmodified upstream builds; their sources are linked
+  below.
+- Qt/PySide6 remains LGPL-3.0: the libraries ship unmodified as dynamic
+  libraries inside the bundle and remain replaceable, and `LGPL-3.0.txt` is
+  attached to every release.
+- Every release must state this binary license in its notes; see the
+  release checklist at the bottom of this file.
+
+## Repository source code
+
 Resume Screener's original source code is licensed under the MIT License in
 [LICENSE](LICENSE). Third-party components keep their own licenses. This summary
 is provided for convenience, not as legal advice.
@@ -64,8 +89,10 @@ component-specific terms.
 Before distributing a binary, include the full license texts required by the
 applicable licenses and review the obligations with legal counsel. In particular:
 
-- For AGPL-3.0, provide the corresponding source and the AGPL text, or obtain a
-  PyMuPDF commercial license.
+- Declare the binary as an **AGPL-3.0 combined work** in the release notes and
+  in README, not as MIT-only.
+- For AGPL-3.0, provide the corresponding source (this repository) and the AGPL
+  text, or build against a PyMuPDF commercial license and say so explicitly.
 - For LGPL-3.0, keep the Qt/PySide6 notices and make the libraries replaceable.
 - Include this file and [LICENSE](LICENSE) with release downloads.
 

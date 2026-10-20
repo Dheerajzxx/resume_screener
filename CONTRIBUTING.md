@@ -93,6 +93,8 @@ standard library already handles well.
 ## License
 
 By contributing, you agree that your contributions are licensed under the MIT
-License in [LICENSE](LICENSE) for the original project code. Bundled third-party
-components have their own terms; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md),
-especially the PyMuPDF AGPL/commercial and PySide6 LGPL requirements.
+License in [LICENSE](LICENSE) for the original project code. Distributed
+binaries are an **AGPL-3.0 combined work** because they bundle PyMuPDF; they
+must not be described as MIT-only. Bundled third-party components have their
+own terms; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), especially the
+PyMuPDF AGPL/commercial and PySide6 LGPL requirements.

@@ -89,9 +89,14 @@ jobs:
           and choose Open the first time (or sign and notarize it for wider
           distribution).
 
-          SHA-256 checksums are attached as \`SHA256SUMS.txt\`. The MIT license,
-          third-party notices, and full AGPL/LGPL texts are attached separately;
-          review \`THIRD_PARTY_NOTICES.md\` before redistributing the app. See
+          SHA-256 checksums are attached as \`SHA256SUMS.txt\`.
+
+          **Licensing:** the repository source code is MIT, but this binary is an
+          **AGPL-3.0 combined work** (it bundles PyMuPDF) — it is not a
+          MIT-only distribution. \`LICENSE\`, \`THIRD_PARTY_NOTICES.md\`, and the full
+          \`AGPL-3.0.txt\`/\`LGPL-3.0.txt\` texts are attached. Corresponding source:
+          ${{ github.server_url }}/${{ github.repository }}
+          Review \`THIRD_PARTY_NOTICES.md\` before redistributing the app. See
           \`CHANGELOG.md\` in the repository for details.
           EOF
           if gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1; then

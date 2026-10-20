@@ -28,6 +28,14 @@ All notable changes to this project are documented here. This project follows
 - Release assets include the app zip, SHA-256 checksum, license, notices, and
   full AGPL-3.0/LGPL-3.0 texts.
 
+### Licensing
+
+- Repository source code is MIT; the distributed `.app`/release zip is declared
+  an **AGPL-3.0 combined work** because it bundles PyMuPDF. Release notes,
+  README, and `THIRD_PARTY_NOTICES.md` state this explicitly, and each release
+  attaches the full AGPL-3.0/LGPL-3.0 texts plus a corresponding-source link.
+  Qt/PySide6 remains LGPL-3.0 (unmodified, replaceable dynamic libraries).
+
 ### Known limitations
 
 - OCR is not implemented; image-only PDFs are flagged as Scanned.

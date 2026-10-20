@@ -3,8 +3,9 @@
 These are the full texts for the licenses that apply to bundled components
 described in [../THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
 
-- `AGPL-3.0.txt` — GNU Affero General Public License v3.0, used by PyMuPDF
-  (or use a commercial PyMuPDF license).
+- `AGPL-3.0.txt` — GNU Affero General Public License v3.0. PyMuPDF is
+  AGPL-3.0 or commercial, so the distributed `.app`/release zip is conveyed as
+  an **AGPL-3.0 combined work**; this text accompanies every release.
 - `LGPL-3.0.txt` — GNU Lesser General Public License v3.0, used by
   PySide6/Shiboken6 and Qt.
 

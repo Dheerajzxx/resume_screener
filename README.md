@@ -3,7 +3,8 @@
 ![Version](https://img.shields.io/badge/version-1.0.0-7C5CFF)
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
 ![Platform](https://img.shields.io/badge/platform-macOS%20arm64-000000?logo=apple&logoColor=white)
-![License](https://img.shields.io/badge/license-MIT%20(app%20code)-green)
+![Source license](https://img.shields.io/badge/source-MIT-green)
+![Binary license](https://img.shields.io/badge/binary-AGPL--3.0-blue)
 
 A native-feeling macOS app that reads a folder of PDF resumes, scores each one
 against your keywords, and copies or moves the strongest matches into a
@@ -34,7 +35,8 @@ Release builds are published on the repository's **Releases** page as
 `Resume-Screener-vX.Y.Z-macOS-arm64.zip`. Download the zip, unzip it, and move
 `Resume Screener.app` wherever you like. Each release attaches
 `SHA256SUMS.txt`, `LICENSE`, `THIRD_PARTY_NOTICES.md`, and the full
-`AGPL-3.0.txt`/`LGPL-3.0.txt` texts.
+`AGPL-3.0.txt`/`LGPL-3.0.txt` texts. The packaged app is distributed as an
+**AGPL-3.0 combined work** (see [License](#license)).
 
 The app is **ad-hoc signed but not Developer ID-signed or notarized**. On
 another Mac, right-click the app and choose **Open** the first time. To
@@ -199,14 +201,23 @@ public issue.
 
 ## License
 
-The original code in this repository is [MIT](LICENSE) © 2026 Resume Screener
-contributors.
+Two licenses apply, and the binary is **not** MIT-only:
 
-Bundled third-party components keep their own licenses. In particular,
-**PyMuPDF is AGPL-3.0 or commercial** and **PySide6/Qt is LGPL-3.0/GPL**. If you
-redistribute the packaged `.app`, review
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and comply with those terms
-(which may require publishing source under AGPL-3.0 or purchasing a PyMuPDF
-commercial license).
+- **Source code in this repository** — [MIT](LICENSE) © 2026 Resume Screener
+  contributors. MIT is permissive, so this code may be included in an AGPL-3.0
+  combined work.
+- **Distributed binaries (`.app` / release zip)** — **AGPL-3.0 combined work**,
+  because the app bundles PyMuPDF (AGPL-3.0). Corresponding source is this
+  repository: <https://github.com/Dheerajzxx/resume_screener>. The full
+  AGPL-3.0 text ships in `licenses/AGPL-3.0.txt` and is attached to every
+  release. If you build against a commercial PyMuPDF license from
+  [Artifex](https://artifex.com/licensing/), the PyMuPDF AGPL obligation does
+  not apply — say so explicitly in the release notes.
 
-See [CHANGELOG.md](CHANGELOG.md) for release history.
+**PySide6/Qt** stays under LGPL-3.0/GPL: the Qt libraries are bundled unmodified
+as dynamic libraries and remain replaceable, with `licenses/LGPL-3.0.txt`
+attached to every release.
+
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the full dependency
+list, the release checklist, and redistribution obligations, and
+[CHANGELOG.md](CHANGELOG.md) for release history.
